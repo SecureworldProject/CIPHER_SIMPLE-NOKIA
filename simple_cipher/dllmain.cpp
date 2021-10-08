@@ -19,8 +19,8 @@ struct Cipher* cipher_data;
 /////  FUNCTION PROTOTYPES  /////
 
 extern "C" _declspec(dllexport) int init(struct Cipher* cipher_data_param);
-extern "C" _declspec(dllexport) int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key, uint32_t extra);
-extern "C" _declspec(dllexport) int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData* key, uint32_t extra);
+extern "C" _declspec(dllexport) int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key);
+extern "C" _declspec(dllexport) int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData* key);
 
 
 
@@ -34,14 +34,14 @@ int init(struct Cipher* cipher_data_param) {
     return 0;
 }
 
-int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key, uint32_t extra) {
+int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key) {
     printf("Ciphering (%ws)\n", cipher_data->file_name);
     memcpy(out_buf, in_buf, size);
 
     return 0;
 }
 
-int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key, uint32_t extra) {
+int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key) {
     printf("Deciphering (%ws)\n", cipher_data->file_name);
     memcpy(out_buf, in_buf, size);
 
