@@ -36,14 +36,32 @@ int init(struct Cipher* cipher_data_param) {
 
 int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key) {
     printf("Ciphering (%ws)\n", cipher_data->file_name);
-    memcpy(out_buf, in_buf, size);
+    //memcpy(out_buf, in_buf, size);
+
+    byte my_key = 0;
+    for (size_t i = 0; i < key->size; i++) {
+        my_key += key->data[i];
+    }
+
+    for (size_t i = 0; i < size; i++) {
+        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] + my_key);// % 256;
+    }
 
     return 0;
 }
 
 int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct KeyData *key) {
     printf("Deciphering (%ws)\n", cipher_data->file_name);
-    memcpy(out_buf, in_buf, size);
+    //memcpy(out_buf, in_buf, size);
+
+    byte my_key = 0;
+    for (size_t i = 0; i < key->size; i++) {
+        my_key += key->data[i];
+    }
+
+    for (size_t i = 0; i < size; i++) {
+        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] - my_key);// % 256;
+    }
 
     return 0;
 }
