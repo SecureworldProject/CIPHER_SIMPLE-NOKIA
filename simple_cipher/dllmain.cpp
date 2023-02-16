@@ -44,7 +44,7 @@ int cipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct Key
     }
 
     for (size_t i = 0; i < size; i++) {
-        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] + my_key);// % 256;
+        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] + my_key) % 256;
     }
 
     return 0;
@@ -60,7 +60,7 @@ int decipher(LPVOID out_buf, LPCVOID in_buf, DWORD size, size_t offset, struct K
     }
 
     for (size_t i = 0; i < size; i++) {
-        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] - my_key);// % 256;
+        ((byte*)out_buf)[i] = (((byte*)in_buf)[i] - my_key) % 256;
     }
 
     return 0;
